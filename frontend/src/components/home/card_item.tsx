@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Col } from "react-bootstrap";
+import { Button, Card, Col } from "react-bootstrap";
 
 interface CardOption{
     image:string,
@@ -8,12 +8,13 @@ interface CardOption{
 }
 const Card_Item:React.FC<CardOption> = ({image,header,body})=>{
     return(
-        <Col xs={3}> 
+        <Col> 
         <Card>
-            <Card.Img style={{maxHeight:"300px",height:"100%",objectFit:"cover"}} variant="top" src={image} />
+            <Card.Img style={{maxHeight:"300px",objectFit:'cover'}} variant="top" src={image}/>
             <Card.Body>
                 <Card.Title>{header}</Card.Title>
                 <Card.Text>{body}</Card.Text>
+                <Button variant="warning" className="text-white">Смотреть подробнее</Button>
             </Card.Body>
         </Card>
         </Col>

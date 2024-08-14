@@ -9,15 +9,16 @@ export default class UserController{
         await user.save();
         res.status(201).json({msg:'Пользователь создан'});
     }
+    public static login(req:Request,res:Response){
+
+    }
     public static read(req:Request,res:Response){
-        const users = [
-            {
-                name:'John'
-            },
-            {
-                name:'James'
-            }
-        ];
-        res.status(200).json({users});
+        
+    }
+    public static update(req:Request,res:Response){
+
+    }
+    public static delete(req:Request,res:Response){
+        
     }
 }
