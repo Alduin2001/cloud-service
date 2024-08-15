@@ -4,6 +4,7 @@ import About from "../components/about/about"
 import Profile from "../components/profile"
 import OrderTarif from "../components/order/order_tarif"
 import MyCloud from "../components/cloud/my_cloud"
+import MyOrders from "../components/order/myorders"
 interface RouteOption{
     name:string,
     path:string,
@@ -24,7 +25,7 @@ const publicRoute:RouteOption[] = [
     {
         name:'Заказать тариф',
         path:'/order_tarif',
-        component:Profile
+        component:OrderTarif
     },
     {
         name:'Облако',
@@ -34,7 +35,12 @@ const publicRoute:RouteOption[] = [
     {
         name:'Профиль',
         path:'/profile',
-        component:OrderTarif
+        component:Profile
+    },
+    {
+        name:'Мои заказы',
+        path:'/myorders',
+        component:MyOrders
     }
 ];
 
