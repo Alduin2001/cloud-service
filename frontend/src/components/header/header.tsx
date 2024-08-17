@@ -1,11 +1,11 @@
 import React from "react";
-import { Button, Nav, Navbar } from "react-bootstrap";
+import { Button, Dropdown, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import AuthWindow from "./authwindow";
 import RegisterWindow from "./registerwindow";
 import { useStore } from "../../config/context";
 import { observer } from "mobx-react";
-import { publicRoute } from "../../config/routes";
+import { publicRoute, adminRoutes, authRoutes } from "../../config/routes";
 const HeaderComponent:React.FC = observer(() => {
     const rootStore = useStore();
     const {headerStore} = rootStore!;
@@ -18,11 +18,30 @@ const HeaderComponent:React.FC = observer(() => {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav>
-                    {publicRoute.map((el,i)=><Nav.Link key={i} as={Link} to={el.path}>{el.name}</Nav.Link>)}
+                {publicRoute.map((el,i)=><Nav.Link key={i} as={Link} to={el.path}>{el.name}</Nav.Link>)}
+                {/* Auth dropdown */}
+                <Dropdown className="ms-2">
+                        <Dropdown.Toggle variant="success" id="dropdown-basic">Личный кабинет</Dropdown.Toggle>
+                        <Dropdown.Menu>
+                        {authRoutes.map((el,i)=><Dropdown.Item key={i} as={Link} to={el.path}>{el.name}</Dropdown.Item>)}
+                    </Dropdown.Menu>
+                    </Dropdown>
+                {/* Admin dropdown */}
+                    <Dropdown className="ms-2">
+                        <Dropdown.Toggle variant="success" id="dropdown-basic">Администрирование</Dropdown.Toggle>
+                        <Dropdown.Menu>
+                        {adminRoutes.map((el,i)=><Dropdown.Item key={i} as={Link} to={el.path}>{el.name}</Dropdown.Item>)}
+                    </Dropdown.Menu>
+                    </Dropdown>
                 </Nav>
                 <Nav className="ms-auto">
-                    <Button className="me-2" variant="primary" onClick={()=>headerStore.showRegisterModal()}>Регистрация</Button>
-                    <Button className="me-2" variant="primary" onClick={()=>headerStore.showAuthModal()}>Авторизация</Button>
+                    <Dropdown className="me-2">
+                        <Dropdown.Toggle variant="primary">Аутентификация</Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            <Dropdown.Item onClick={()=>headerStore.showRegisterModal()}>Регистрация</Dropdown.Item>
+                            <Dropdown.Item onClick={()=>headerStore.showAuthModal()}>Авторизация</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

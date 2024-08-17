@@ -2,12 +2,20 @@ import { Request,Response } from "express";
 import User from "../models/User";
 export default class UserController{
     public static async create(req:Request,res:Response){
-        const {name} = req.body;
+        try{
+            const {name,surname,patronymic,email,password} = req.body;
         const user = new User({
-            name:name
+            name:name,
+            surname:surname,
+            password:password,
+            patronymic:patronymic,
+            email:email
         });
         await user.save();
         res.status(201).json({msg:'Пользователь создан'});
+        }catch(err){
+            res.status(500).json({err});
+        }
     }
     public static login(req:Request,res:Response){
 

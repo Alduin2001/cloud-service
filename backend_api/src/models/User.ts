@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import bcrypt from 'bcrypt';
 const userSchema = new mongoose.Schema({
     name:{
         type:String,
@@ -26,20 +26,15 @@ const userSchema = new mongoose.Schema({
         type:String,
         default:'user'
     },
-    isVeryfied:{
-        type:Boolean,
-        default:false
-    },
-    veryficationToken:{
-        type:String
-    }
 });
 
-userSchema.pre('save',function(next){
+userSchema.pre('save',async function(next){
     const user = this;
     if(!user.isModified('password')){
         next();
     }
+    const salt = await bcrypt.genSalt(5);
+    user.password = await bcrypt.hash(user.password,salt);
 });
 const User = mongoose.model('User',userSchema);
 

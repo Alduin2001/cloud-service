@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Col, Container, ListGroup, Row } from "react-bootstrap";
+import { Button, Col, Container, ListGroup, Pagination, Row } from "react-bootstrap";
 import MyCloudItem from "./my_cloud_item";
 import cloud from '../../cloud1.jpeg';
 import { useStore } from "../../config/context";
@@ -35,9 +35,27 @@ const MyCloud:React.FC = observer(()=>{
                 <Col md={9}>
                 <Row>
                     {cloud_data.map((el,i)=><MyCloudItem key={i} image={el.image} header={el.header} body={el.body}/>)}
+                    <Pagination className="mt-2 justify-content-center">
+                        <Pagination.Item>
+                            <Button variant="primary">1</Button>
+                        </Pagination.Item>
+                        <Pagination.Item>
+                            <Button variant="primary">2</Button>
+                        </Pagination.Item>
+                        <Pagination.Item>
+                            <Button variant="primary">3</Button>
+                        </Pagination.Item>
+                        <Pagination.Item>
+                            <p>...</p>
+                        </Pagination.Item>
+                        <Pagination.Item>
+                            <Button variant="primary">133</Button>
+                        </Pagination.Item>
+                    </Pagination>
                 </Row>
                 </Col>
             </Row>
+
             {cloudStore.isOpenModal && (<AddFileWindow/>)}
         </Container>
     )

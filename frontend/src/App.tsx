@@ -2,7 +2,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container } from "react-bootstrap";
 import HeaderComponent from "./components/header/header";
 import Main from './components/main';
-import Footer from './components/footer';
 import { BrowserRouter } from 'react-router-dom';
 function App() {
 
@@ -12,7 +11,6 @@ function App() {
     <Container fluid>
       <Main/>
     </Container>
-      <Footer/>
     </BrowserRouter>
   )
 }

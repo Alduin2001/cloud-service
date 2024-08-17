@@ -5,6 +5,9 @@ import Profile from "../components/profile"
 import OrderTarif from "../components/order/order_tarif"
 import MyCloud from "../components/cloud/my_cloud"
 import MyOrders from "../components/order/myorders"
+import CreateTarif from "../components/tarif/create_tarif"
+import ManageTarif from "../components/tarif/manage_tarif"
+import ManageOrders from "../components/order/manage_order"
 interface RouteOption{
     name:string,
     path:string,
@@ -22,6 +25,13 @@ const publicRoute:RouteOption[] = [
         path:'/about',
         component:About
     },
+];
+const authRoutes:RouteOption[] = [
+    {
+        name:'Профиль',
+        path:'/profile',
+        component:Profile
+    },
     {
         name:'Заказать тариф',
         path:'/order_tarif',
@@ -33,15 +43,27 @@ const publicRoute:RouteOption[] = [
         component:MyCloud
     },
     {
-        name:'Профиль',
-        path:'/profile',
-        component:Profile
-    },
-    {
         name:'Мои заказы',
         path:'/myorders',
         component:MyOrders
+    },
+];
+const adminRoutes:RouteOption[] = [
+    {
+        name:'Создать тариф',
+        path:'/create_tarif',
+        component:CreateTarif
+    },
+    {
+        name:'Управление тарифами',
+        path:'/manage_tarif',
+        component:ManageTarif
+    },
+    {
+        name:'Управление заказами',
+        path:'/manage_orders',
+        component:ManageOrders
     }
 ];
 
-export {publicRoute};
+export {publicRoute, adminRoutes, authRoutes};
