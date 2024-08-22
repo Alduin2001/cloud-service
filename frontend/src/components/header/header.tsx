@@ -24,6 +24,7 @@ const HeaderComponent:React.FC = observer(() => {
                         <Dropdown.Toggle variant="success" id="dropdown-basic">Личный кабинет</Dropdown.Toggle>
                         <Dropdown.Menu>
                         {authRoutes.map((el,i)=><Dropdown.Item key={i} as={Link} to={el.path}>{el.name}</Dropdown.Item>)}
+                        <Dropdown.Item>Выйти</Dropdown.Item>
                     </Dropdown.Menu>
                     </Dropdown>
                 {/* Admin dropdown */}

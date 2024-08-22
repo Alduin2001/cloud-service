@@ -4,6 +4,8 @@ export default class UserStore{
 
     public status:string = "";
     public statusCode = 0;
+    public token:string = localStorage.getItem('token') || '';
+    public role:string = localStorage.getItem('role') || '';
     constructor(){
         makeAutoObservable(this);
     }
@@ -16,4 +18,19 @@ export default class UserStore{
             console.log(err);
         }
     }
+    public async login(data:object){
+        try {
+            
+        } catch (error) {
+            
+        }
+    }
+
+    private setAuth(){
+        
+    }
+    private removeAuth(){
+
+    }
+
 }

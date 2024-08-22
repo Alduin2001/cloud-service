@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, Card, Col, Container, Row } from "react-bootstrap";
+import { Card, Col, Container, Row } from "react-bootstrap";
 
 const About:React.FC = ()=>{
     document.title = "О нас";
@@ -9,7 +9,7 @@ const About:React.FC = ()=>{
             <Row className="gap-2">
                 <Col>
                     <Card>
-                        <Card.Header>Точность</Card.Header>
+                        <Card.Header>Надёжность</Card.Header>
                         <Card.Body>
                             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Autem cupiditate odit molestias consectetur, animi corporis hic doloremque debitis quidem magnam voluptatum atque obcaecati ipsum recusandae eius rem nobis unde similique.
                         </Card.Body>
@@ -17,7 +17,7 @@ const About:React.FC = ()=>{
                 </Col>
                 <Col>
                 <Card>
-                        <Card.Header>Точность</Card.Header>
+                        <Card.Header>Быстрое размещение</Card.Header>
                         <Card.Body>
                             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Autem cupiditate odit molestias consectetur, animi corporis hic doloremque debitis quidem magnam voluptatum atque obcaecati ipsum recusandae eius rem nobis unde similique.
                         </Card.Body>
@@ -25,7 +25,7 @@ const About:React.FC = ()=>{
                 </Col>
                 <Col>
                 <Card>
-                        <Card.Header>Точность</Card.Header>
+                        <Card.Header>Удобство</Card.Header>
                         <Card.Body>
                             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Autem cupiditate odit molestias consectetur, animi corporis hic doloremque debitis quidem magnam voluptatum atque obcaecati ipsum recusandae eius rem nobis unde similique.
                         </Card.Body>
