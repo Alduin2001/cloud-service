@@ -19,6 +19,6 @@ const tarifSchema = new mongoose.Schema({
     }
 });
 
-const Tarif = mongoose.model('Order',tarifSchema);
+const Tarif = mongoose.model('Tarif',tarifSchema);
 
 export default Tarif;

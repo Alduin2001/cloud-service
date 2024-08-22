@@ -1,5 +1,6 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import bcrypt from 'bcrypt';
+import Tarif from "./Tarif";
 const userSchema = new mongoose.Schema({
     name:{
         type:String,
@@ -21,6 +22,14 @@ const userSchema = new mongoose.Schema({
     password:{
         type:String,
         required:true
+    },
+    tarif:{
+        type:Schema.Types.ObjectId,
+        ref:'Tarif'
+    },
+    accessCloud:{
+        type:Boolean,
+        default:false
     },
     role:{
         type:String,

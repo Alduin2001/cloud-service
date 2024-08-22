@@ -3,6 +3,7 @@ import router from './routes';
 import dotenv from 'dotenv';
 import connectionDB from './config/connection';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 dotenv.config();
 const dbUri = process.env.DB ?? 'mongodb://localhost:27017/test';
 connectionDB(dbUri);
@@ -10,6 +11,7 @@ const app: Express = express();
 const PORT: number = parseInt(process.env.PORT || '3005', 10);
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors());
 app.use(router);
 

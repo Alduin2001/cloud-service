@@ -35,7 +35,8 @@ export default class UserController{
                 name:finded.name,
                 surname:finded.surname,
                 patronymic:finded.patronymic,
-                email:finded.email
+                email:finded.email,
+                role:finded.role
             };
             const token = await makeToken(payload);
             return res.status(200).json({token});
