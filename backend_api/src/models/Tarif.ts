@@ -13,6 +13,9 @@ const tarifSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
+    description:{
+        type:String
+    },
     createdAt:{
         type:Date,
         default:Date.now()

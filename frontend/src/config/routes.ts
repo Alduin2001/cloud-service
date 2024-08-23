@@ -8,6 +8,7 @@ import MyOrders from "../components/order/myorders"
 import CreateTarif from "../components/tarif/create_tarif"
 import ManageTarif from "../components/tarif/manage_tarif"
 import ManageOrders from "../components/order/manage_order"
+import TarifOne from "../components/tarif/tarif_one"
 interface RouteOption{
     name:string,
     path:string,
@@ -25,6 +26,11 @@ const publicRoute:RouteOption[] = [
         path:'/about',
         component:About
     },
+    {
+        name:'Тариф один',
+        path:'/tarif_one/:id',
+        component:TarifOne
+    }
 ];
 const authRoutes:RouteOption[] = [
     {

@@ -4,11 +4,12 @@ import Tarif from "../models/Tarif";
 export default class TarifController{
     public static async create(req:Request,res:Response){
         try {
-            const {name,price,size} = req.body;
+            const {name,price,size,description} = req.body;
             const tarif = new Tarif({
                 name,
                 price,
-                size
+                size,
+                description
             });
             await tarif.save();
             res.status(201).json({msg:'Тариф добавлен'});

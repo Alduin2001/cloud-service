@@ -9,6 +9,7 @@ import { publicRoute, adminRoutes, authRoutes } from "../../config/routes";
 const HeaderComponent:React.FC = observer(() => {
     const rootStore = useStore();
     const {headerStore} = rootStore!;
+    
     return (
         <>
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -18,7 +19,7 @@ const HeaderComponent:React.FC = observer(() => {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav>
-                {publicRoute.map((el,i)=><Nav.Link key={i} as={Link} to={el.path}>{el.name}</Nav.Link>)}
+                {publicRoute.filter((el)=>!el.name.includes('Тариф один')).map((el,i)=><Nav.Link key={i} as={Link} to={el.path}>{el.name}</Nav.Link>)}
                 {/* Auth dropdown */}
                 <Dropdown className="ms-2">
                         <Dropdown.Toggle variant="success" id="dropdown-basic">Личный кабинет</Dropdown.Toggle>

@@ -15,7 +15,7 @@ const Cards:React.FC = observer(()=>{
         <Container>
         <h1 className="text-center">Наши предложения для вас</h1>
         <Row className="gap-2">
-        {tarifStore.tarifs.map((el,i)=><Card_Item key={el._id} image={cloud1} name={el.name} price={el.price} size={el.size}/>)}
+        {tarifStore.tarifs.map((el:any)=><Card_Item key={el._id} _id={el._id} image={cloud1} name={el.name} price={el.price} size={el.size}/>)}
         </Row>
         
         </Container>

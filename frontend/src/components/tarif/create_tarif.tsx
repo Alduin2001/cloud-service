@@ -8,10 +8,11 @@ const CreateTarif:React.FC = observer(()=>{
     const [formData,setFormData] = useState({
         name:'',
         price:0,
-        size:0
+        size:0,
+        description:''
     });
-    const handleChange = (ev:FormEvent<HTMLInputElement>)=>{
-        const {name, value} = ev.target;
+    const handleChange = (ev:FormEvent<HTMLInputElement | HTMLFormElement>)=>{
+        const {name, value} = ev.currentTarget;
         setFormData(prevState=>({
             ...prevState,
             [name]:value
@@ -19,13 +20,15 @@ const CreateTarif:React.FC = observer(()=>{
     }
     const submitForm = async (ev:FormEvent<HTMLFormElement>)=>{
         ev.preventDefault();
-        const response = await tarifStore.create(formData);
+        await tarifStore.create(formData);
+        clearForm();
     }
     const clearForm = ()=>{
         setFormData({
             name:'',
             price:0,
-            size:0
+            size:0,
+            description:''
         })
     }
     document.title = "Добавление тарифа";
@@ -45,6 +48,11 @@ const CreateTarif:React.FC = observer(()=>{
                     <Form.Label>Размер</Form.Label>
                     <Form.Control type="number" name="size" value={formData.size} onChange={handleChange}/>
                     <Form.Text>Введите размер в мегабайтах</Form.Text>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Описание</Form.Label>
+                    <Form.Control as="textarea" rows={5} name="description" value={formData.description} onChange={handleChange}/>
+                    <Form.Text>Введите описание для пользователей, которое должно информативности дать</Form.Text>
                 </Form.Group>
                 <Form.Group className="mt-2">
                     <Row>

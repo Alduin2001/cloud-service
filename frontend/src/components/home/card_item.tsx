@@ -3,12 +3,13 @@ import { Card, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 interface CardOption{
+    _id:string,
     image:string,
     name:string,
     price:number,
     size:number
 }
-const Card_Item:React.FC<CardOption> = ({image,name,price,size})=>{
+const Card_Item:React.FC<CardOption> = ({_id,image,name,price,size})=>{
     return(
         <Col> 
         <Card>
@@ -17,7 +18,7 @@ const Card_Item:React.FC<CardOption> = ({image,name,price,size})=>{
                 <Card.Title>{name}</Card.Title>
                 <Card.Text>Цена: {price} рублей</Card.Text>
                 <Card.Text>Размер: {size} мб</Card.Text>
-                <Card.Link as={Link} to="/about">Смотреть подробнее</Card.Link>
+                <Card.Link as={Link} to={`/tarif_one/${_id}`}>Смотреть подробнее</Card.Link>
             </Card.Body>
         </Card>
         </Col>

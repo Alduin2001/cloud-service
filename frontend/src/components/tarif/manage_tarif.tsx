@@ -1,5 +1,5 @@
-import React,{useEffect, useState} from "react";
-import { Container, Row, Button } from "react-bootstrap";
+import React,{useEffect} from "react";
+import { Container, Row, Alert } from "react-bootstrap";
 import TarifItem from "./tarif_item";
 import { useStore } from "../../config/context";
 import { observer } from "mobx-react";
@@ -15,7 +15,7 @@ const ManageTarif:React.FC = observer(()=>{
         <Container fluid>
             <h1 className="text-center">Управление тарифами</h1>
             <Row>
-                {tarifStore.tarifs.map((el,i)=><TarifItem key={i} name={el.name} price={el.price} size={el.size}/>)}
+                {tarifStore.tarifs.length>0 ? tarifStore.tarifs.map((el:any,i:number)=><TarifItem key={i} _id={el._id} name={el.name} price={el.price} size={el.size} />) : (<Alert variant="danger">Тарифов нет</Alert>)}
             </Row>
         </Container>
     )
