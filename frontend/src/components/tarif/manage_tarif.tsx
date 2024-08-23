@@ -1,21 +1,24 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
 import { Container, Row, Button } from "react-bootstrap";
 import TarifItem from "./tarif_item";
-const ManageTarif:React.FC = ()=>{
+import { useStore } from "../../config/context";
+import { observer } from "mobx-react";
+const ManageTarif:React.FC = observer(()=>{
     document.title = 'Управление тарифами';
-    const tarifs = [
-        {name:'Минимальный',price:250,size:5},
-        {name:'Стандарт',price:500,size:15},
-        {name:'Бизнес',price:1000,size:50},
-    ];
+    const rootStore = useStore();
+    const {tarifStore} = rootStore!;
+    useEffect(()=>{
+        tarifStore.get();
+    },[]);
+    
     return(
         <Container fluid>
             <h1 className="text-center">Управление тарифами</h1>
             <Row>
-                {tarifs.map((el,i)=><TarifItem key={i} name={el.name} price={el.price} size={el.size}/>)}
+                {tarifStore.tarifs.map((el,i)=><TarifItem key={i} name={el.name} price={el.price} size={el.size}/>)}
             </Row>
         </Container>
     )
-}
+})
 
 export default ManageTarif;

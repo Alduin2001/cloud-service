@@ -39,9 +39,11 @@ export default class TarifController{
     }
     public static async delete(req:Request,res:Response){
         try {
-            
+            const id = req.params.id;
+            const tarif = await Tarif.findByIdAndDelete(id);
+            res.status(200).json({msg:'Удалено'});
         } catch (error) {
-            
+            res.status(500).json({error});
         }
     }
 }

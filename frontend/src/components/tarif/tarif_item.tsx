@@ -13,8 +13,8 @@ const TarifItem:React.FC<TarifOption> = ({name,price,size})=>{
             <Card>
                 <Card.Header>{name}</Card.Header>
                 <Card.Body>
-                    <p>Цена:{price} рублей</p>
-                    <p>Размер:{size}МБ</p>
+                    <Card.Text>Цена:{price} рублей</Card.Text>
+                    <Card.Text>Размер:{size}МБ</Card.Text>
                     <Row>
                         <Col>
                             <Button variant="primary" className="w-100">Редактировать</Button>
