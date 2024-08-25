@@ -1,4 +1,4 @@
-import React,{FormEvent, useState} from "react";
+import React,{ChangeEvent, FormEvent, useState} from "react";
 import { Button, Container, Form, Row, Col, Alert } from "react-bootstrap";
 import { observer } from "mobx-react";
 import { useStore } from "../../config/context";
@@ -11,7 +11,7 @@ const CreateTarif:React.FC = observer(()=>{
         size:0,
         description:''
     });
-    const handleChange = (ev:FormEvent<HTMLInputElement | HTMLFormElement>)=>{
+    const handleChange = (ev:ChangeEvent<HTMLInputElement>)=>{
         const {name, value} = ev.currentTarget;
         setFormData(prevState=>({
             ...prevState,

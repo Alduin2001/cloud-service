@@ -4,9 +4,7 @@ import App from './App.tsx';
 import { StoreProvider } from './config/context.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
     <StoreProvider>
     <App />
-    </StoreProvider>
-  </React.StrictMode>,
+    </StoreProvider>,
 )

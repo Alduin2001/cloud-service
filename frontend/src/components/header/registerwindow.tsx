@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import { Modal, Form, Row, Col, Button, Alert } from "react-bootstrap";
 import { useStore } from "../../config/context";
 import { observer } from "mobx-react";
@@ -14,7 +14,7 @@ const RegisterWindow: React.FC = observer(() => {
         password: ''
     });
 
-    const handleChange = (ev: FormEvent<HTMLInputElement>) => {
+    const handleChange = (ev: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = ev.currentTarget;
         setFormData(prevState => ({
             ...prevState,

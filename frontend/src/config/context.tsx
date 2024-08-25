@@ -1,10 +1,10 @@
-import React, { createContext, ReactNode, useContext } from "react";
+import React, { createContext, useContext } from "react";
 import RootStore from "../stores/rootStore";
 
 const StoreContext = createContext<RootStore | undefined>(undefined);
 
 interface StoreProviderProps {
-    children: ReactNode;
+    children: React.ReactNode;
 }
 
 const StoreProvider = ({ children }: StoreProviderProps) => {

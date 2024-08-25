@@ -41,14 +41,19 @@ export default class UserController{
             const token = await makeToken(payload);
             return res.status(200).json({token});
         } catch (error) {
-            console.log(error);
+            res.status(500).json({error});
         }
     }
     public static read(req:Request,res:Response){
         
     }
     public static update(req:Request,res:Response){
-
+        try {
+            const {name,surname,patronymic} = req.body;
+            
+        } catch (error) {
+            
+        }
     }
     public static delete(req:Request,res:Response){
         

@@ -1,8 +1,14 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Button, Container, Table } from "react-bootstrap";
-
+import { observer } from "mobx-react";
+import { useStore } from "../../config/context";
 const MyOrders:React.FC = ()=>{
     document.title = "Мои заказы";
+    const rootStore = useStore();
+    const {orderStore} = rootStore!;
+    useEffect(()=>{
+        orderStore.getMyOrders();
+    },[]);
     return(
         <Container>
             <Table className="mt-2" striped hover>
@@ -16,27 +22,15 @@ const MyOrders:React.FC = ()=>{
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Стандарт</td>
-                        <td>500 рублей</td>
-                        <td>На рассмотрении</td>
-                        <td><Button variant="danger">Удалить</Button></td>
+                    {orderStore.orders.map((el:any,i)=>(
+                        <tr key={i}>
+                            <td>{i+1}</td>
+                            <td>{el.tarif.name}</td>
+                            <td>{el.tarif.price} рублей</td>
+                            <td>На рассмотрении</td>
+                            <td><Button variant="danger">Удалить</Button></td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Стандарт</td>
-                        <td>500 рублей</td>
-                        <td>На рассмотрении</td>
-                        <td><Button variant="danger">Удалить</Button></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Стандарт</td>
-                        <td>500 рублей</td>
-                        <td>На рассмотрении</td>
-                        <td><Button variant="danger">Удалить</Button></td>
-                    </tr>
+                    ))}
                 </tbody>
             </Table>
         </Container>

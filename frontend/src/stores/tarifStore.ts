@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import MainService from "../config/service";
+import { AxiosResponse } from "axios";
 export default class TarifStore{
     public status:number = 0;
     public statusMessage:string = '';
@@ -14,8 +15,7 @@ export default class TarifStore{
     }
     public async create(data:object){
         try {
-            const response = await MainService.post('/api/tarif/create',data);
-            console.log(response);
+            const response:AxiosResponse = await MainService.post('/api/tarif/create',data);
             this.status = response.status;
             this.statusMessage = response.data.msg;
         } catch (error) {
@@ -29,20 +29,19 @@ export default class TarifStore{
     public closeDelModal():void{
         this.isOpenDelModal = false;
     }
-    public async get(data?:object){
+    public async get(){
         try {
-            const response = await MainService.get('/api/tarif/read');
+            const response:AxiosResponse = await MainService.get('/api/tarif/read');
             this.page = response.data.page;
             this.pages = response.data.pages;
             this.tarifs = response.data.tarifs;
-            console.log(response);
         } catch (error) {
             console.log(error);
         }
     }
     public async delete(_id:string){
         try {
-            const response = await MainService.delete(`/api/tarif/delete/${_id}`);
+            const response:AxiosResponse = await MainService.delete(`/api/tarif/delete/${_id}`);
             this.status = response.status;
             this.statusMessage = response.data.msg;
             if(this.status==200){
