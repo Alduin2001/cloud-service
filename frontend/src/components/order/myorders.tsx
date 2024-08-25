@@ -2,7 +2,8 @@ import React, {useEffect} from "react";
 import { Button, Container, Table } from "react-bootstrap";
 import { observer } from "mobx-react";
 import { useStore } from "../../config/context";
-const MyOrders:React.FC = ()=>{
+import ConfirmDeleteOrder from "./confirm_delete_order";
+const MyOrders:React.FC = observer(()=>{
     document.title = "Мои заказы";
     const rootStore = useStore();
     const {orderStore} = rootStore!;
@@ -11,6 +12,7 @@ const MyOrders:React.FC = ()=>{
     },[]);
     return(
         <Container>
+            <ConfirmDeleteOrder/>
             <Table className="mt-2" striped hover>
                 <thead>
                     <tr>
@@ -27,7 +29,7 @@ const MyOrders:React.FC = ()=>{
                             <td>{i+1}</td>
                             <td>{el.tarif.name}</td>
                             <td>{el.tarif.price} рублей</td>
-                            <td>На рассмотрении</td>
+                            <td>{el.status}</td>
                             <td><Button variant="danger">Удалить</Button></td>
                     </tr>
                     ))}
@@ -35,6 +37,6 @@ const MyOrders:React.FC = ()=>{
             </Table>
         </Container>
     )
-}
+})
 
 export default MyOrders;

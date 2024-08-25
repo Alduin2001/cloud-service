@@ -24,7 +24,7 @@ export default class OrderController {
         try {
             const user = req.query.user;
             const myorders = await Order.find({user})
-            .select('description')
+            .select('description status')
             .populate({path:'user',select:'name surname patronymic'})
             .populate({path:'tarif',select:'name size price'}).lean();
             res.status(200).json({ myorders });

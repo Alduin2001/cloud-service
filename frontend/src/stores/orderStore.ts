@@ -8,10 +8,16 @@ export default class OrderStore {
     public statusMessage: string = '';
     public token: string = localStorage.getItem('token') || '';
     public orders = [];
+    public isDeleteModal:boolean = false;
     constructor() {
         makeAutoObservable(this);
     }
-
+    public showModal(){
+        this.isDeleteModal = true;
+    }
+    public closeModal(){
+        this.isDeleteModal = false;
+    }
     public async create(data: any) {
         try {
             const decoded = jwtDecode<JwtPayload>(this.token);
@@ -25,6 +31,7 @@ export default class OrderStore {
             this.statusMessage = "Failed to create order";
         }
     }
+
     public async getMyOrders(){
         try {
             const decoded = jwtDecode<JwtPayload>(this.token);
