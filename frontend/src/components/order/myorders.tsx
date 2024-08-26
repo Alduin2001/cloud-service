@@ -30,7 +30,7 @@ const MyOrders:React.FC = observer(()=>{
                             <td>{el.tarif.name}</td>
                             <td>{el.tarif.price} рублей</td>
                             <td>{el.status}</td>
-                            <td><Button variant="danger">Удалить</Button></td>
+                            <td><Button variant="danger" onClick={()=>orderStore.showModal(el._id)}>Удалить</Button></td>
                     </tr>
                     ))}
                 </tbody>

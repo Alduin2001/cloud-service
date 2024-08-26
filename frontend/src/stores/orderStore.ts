@@ -9,13 +9,16 @@ export default class OrderStore {
     public token: string = localStorage.getItem('token') || '';
     public orders = [];
     public isDeleteModal:boolean = false;
+    public selectedID = '';
     constructor() {
         makeAutoObservable(this);
     }
-    public showModal(){
+    public showModal(id:string):void{
+        this.selectedID = id;
         this.isDeleteModal = true;
     }
-    public closeModal(){
+    public closeModal():void{
+        this.selectedID = '';
         this.isDeleteModal = false;
     }
     public async create(data: any) {
@@ -50,6 +53,14 @@ export default class OrderStore {
             console.error("Error retrieving orders:", error);
             this.statusCode = 500;
             this.statusMessage = "Failed to retrieve orders";
+        }
+    }
+    public async deleteOrder(){
+        try {
+            const response = await MainService.delete(`/api/orders/delete/${this.selectedID}`);
+            console.log(response);
+        } catch (error) {
+            console.log(error);
         }
     }
 }
