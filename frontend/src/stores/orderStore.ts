@@ -23,7 +23,7 @@ export default class OrderStore {
     }
     public async create(data: any) {
         try {
-            const decoded = jwtDecode<JwtPayload>(this.token);
+            const decoded:any = jwtDecode<JwtPayload>(this.token);
             data.user = decoded._id;
             const response = await MainService.post('/api/orders/create', data);
             this.statusCode = response.status;
@@ -37,7 +37,7 @@ export default class OrderStore {
 
     public async getMyOrders(){
         try {
-            const decoded = jwtDecode<JwtPayload>(this.token);
+            const decoded:any = jwtDecode<JwtPayload>(this.token);
             const response:AxiosResponse = await MainService.get(`/api/orders/myorders?user=${decoded._id}`);
             this.orders = response.data.myorders;
         } catch (error) {
@@ -46,9 +46,8 @@ export default class OrderStore {
     }
     public async get() {
         try {
-            const response = await MainService.get('/api/orders');
-            console.log("Orders retrieved:", response.data);
-            return response.data;
+            const response:AxiosResponse = await MainService.get('/api/orders/read');
+            this.orders = response.data.orders;
         } catch (error) {
             console.error("Error retrieving orders:", error);
             this.statusCode = 500;
@@ -58,7 +57,10 @@ export default class OrderStore {
     public async deleteOrder(){
         try {
             const response = await MainService.delete(`/api/orders/delete/${this.selectedID}`);
-            console.log(response);
+            if(response.status>=200){
+                this.closeModal();
+            }
+            this.orders = this.orders.filter((el:any)=>el._id==this.selectedID);
         } catch (error) {
             console.log(error);
         }

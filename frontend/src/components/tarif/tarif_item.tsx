@@ -3,6 +3,7 @@ import { Col, Card, Row, Button } from "react-bootstrap";
 import { useStore } from "../../config/context";
 import { observer } from "mobx-react";
 import ConfirmDeleteTarif from "./modal_confirm_delete";
+import EditTarif from "./edit_tarif";
 interface TarifOption{
     _id:string,
     name:string,
@@ -14,6 +15,7 @@ const TarifItem:React.FC<TarifOption> = observer(({_id,name,price,size})=>{
     const {tarifStore} = rootStore!;
     return(
         <>
+        {tarifStore.isOpenEditModal && (<EditTarif />)}
         {tarifStore.isOpenDelModal && (<ConfirmDeleteTarif/>)}
         <Col>
             <Card>
@@ -23,7 +25,7 @@ const TarifItem:React.FC<TarifOption> = observer(({_id,name,price,size})=>{
                     <Card.Text>Размер:{size}МБ</Card.Text>
                     <Row>
                         <Col>
-                            <Button variant="primary" className="w-100">Редактировать</Button>
+                            <Button variant="primary" className="w-100" onClick={()=>tarifStore.showEditModal(_id)}>Редактировать</Button>
                         </Col>
                         <Col>
                             <Button variant="danger" onClick={()=>tarifStore.showDelModal(_id)} className="w-100">Удалить</Button>

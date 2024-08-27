@@ -1,20 +1,50 @@
-import React from "react";
-import { Button, Container, Pagination, Row } from "react-bootstrap";
+import React,{useEffect} from "react";
+import { Button, Container, Pagination, Row, Form, Col } from "react-bootstrap";
 import OrderItem from "./order_item";
-import FilterOrder from "./filter_orders";
-const ManageOrders:React.FC = ()=>{
+import { observer } from "mobx-react";
+import { useStore } from "../../config/context";
+const ManageOrders:React.FC = observer(()=>{
     document.title = 'Управление заказами';
-    const orders = [
-        {user:'User',tarif:'Бизнес',description:'Lorem ipsum',createdAt:'12.04.2020'},
-        {user:'User',tarif:'Бизнес',description:'Lorem ipsum',createdAt:'12.04.2020'},
-        {user:'User',tarif:'Бизнес',description:'Lorem ipsum',createdAt:'12.04.2020'},
-    ]
+    const rootStore = useStore();
+    const {tarifStore,orderStore} = rootStore!;
+    useEffect(()=>{
+        tarifStore.get();
+        orderStore.get();
+    },[]);
     return(
         <Container>
             <h1 className="text-center">Управление заказами</h1>
-            <FilterOrder/>
+            <Form>
+            <Form.Group>
+                <Form.Label>Тариф</Form.Label>
+                <Form.Select>
+                    {tarifStore.tarifs.map((el:any,i)=>(<option key={i} value={el._id}>{el.name}</option>))}
+                </Form.Select>
+            </Form.Group>
+            <Form.Group>
+                <Form.Label>Дата заказа</Form.Label>
+                <Row>
+                    <Col>
+                        <Form.Control type="date"/>
+                    </Col>
+                    <Col>
+                        <Form.Control type="date"/>
+                    </Col>
+                </Row>
+            </Form.Group>
+            <Form.Group className='mt-2'>
+                <Row>
+                    <Col>
+                        <Button type="submit" variant='success' className='w-100'>Поиск</Button>
+                    </Col>
+                    <Col>
+                        <Button type="submit" variant='danger' className='w-100'>Сбросить</Button>
+                    </Col>
+                </Row>
+            </Form.Group>
+        </Form>
             <Row className="mt-2">
-                {orders.map((el,i)=><OrderItem key={i}
+                {orderStore.orders.map((el:any,i)=><OrderItem key={i}
                  user={el.user} tarif={el.tarif}
                  description={el.description} createdAt={el.createdAt}/>)}
             </Row>
@@ -37,5 +67,5 @@ const ManageOrders:React.FC = ()=>{
             </Pagination>
         </Container>
     )
-}
+})
 export default ManageOrders;

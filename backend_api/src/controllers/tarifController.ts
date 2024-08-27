@@ -33,9 +33,17 @@ export default class TarifController{
 
     public static async update(req:Request,res:Response){
         try {
-            
+            const id = req.params.id;
+            const {name,price,size,description} = req.body;
+            const updated = await Tarif.findByIdAndUpdate(id,{
+                name,
+                price,
+                size,
+                description
+            });
+            res.status(200).json({msg:'Успешно обновлён'});
         } catch (error) {
-            
+            res.status(500).json({error});
         }
     }
     public static async delete(req:Request,res:Response){

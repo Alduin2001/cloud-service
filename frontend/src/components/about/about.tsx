@@ -1,9 +1,9 @@
 import React from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 
-const About:React.FC = ()=>{
+const About: React.FC = () => {
     document.title = "О нас";
-    return(
+    return (
         <Container className="bg-secondary p-2 text-white mt-2">
             <h1>Мы крупнейшая компания, предоставляющая облачные решения для бизнеса</h1>
             <Row className="gap-2">
@@ -11,29 +11,29 @@ const About:React.FC = ()=>{
                     <Card>
                         <Card.Header>Надёжность</Card.Header>
                         <Card.Body>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Autem cupiditate odit molestias consectetur, animi corporis hic doloremque debitis quidem magnam voluptatum atque obcaecati ipsum recusandae eius rem nobis unde similique.
+                            Наша компания гарантирует высокую надежность и стабильность работы всех сервисов. Мы используем передовые технологии и инфраструктуру для обеспечения непрерывности бизнес-процессов наших клиентов.
                         </Card.Body>
                     </Card>
                 </Col>
                 <Col>
-                <Card>
+                    <Card>
                         <Card.Header>Быстрое размещение</Card.Header>
                         <Card.Body>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Autem cupiditate odit molestias consectetur, animi corporis hic doloremque debitis quidem magnam voluptatum atque obcaecati ipsum recusandae eius rem nobis unde similique.
+                            Благодаря автоматизированным процессам и интуитивно понятному интерфейсу, наши клиенты могут быстро развернуть свои приложения и сервисы в облаке. Мы сокращаем время выхода на рынок и ускоряем процессы разработки.
                         </Card.Body>
                     </Card>
                 </Col>
                 <Col>
-                <Card>
+                    <Card>
                         <Card.Header>Удобство</Card.Header>
                         <Card.Body>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Autem cupiditate odit molestias consectetur, animi corporis hic doloremque debitis quidem magnam voluptatum atque obcaecati ipsum recusandae eius rem nobis unde similique.
+                            Мы стремимся сделать наши сервисы максимально удобными для пользователей. Наша платформа предлагает широкий спектр инструментов и функций, которые помогают клиентам управлять своими ресурсами эффективно и без лишних усилий.
                         </Card.Body>
                     </Card>
                 </Col>
             </Row>
         </Container>
-    )
+    );
 };
 
 export default About;

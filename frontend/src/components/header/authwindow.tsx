@@ -1,11 +1,12 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import { Modal, Form, Row, Col, Button, Alert } from "react-bootstrap";
+import { Modal, Form, Row, Col, Button, Toast } from "react-bootstrap";
 import { useStore } from "../../config/context";
 import { observer } from "mobx-react";
 const AuthWindow:React.FC = observer(()=>{
     const rootStore = useStore();
     const {headerStore,userStore} = rootStore!;
     const [error,setError] = useState('');
+    const [toast,setToast] = useState(false);
     const [formData,setFormData] = useState({
         email:'',
         password:''
@@ -19,7 +20,12 @@ const AuthWindow:React.FC = observer(()=>{
     }
     const submitForm = async (ev:FormEvent<HTMLFormElement>)=>{
         ev.preventDefault();
-        await userStore.login(formData).then(res=>headerStore.closeAuthModal()).catch(error=>setError('Неверно введены данные'));
+        await userStore.login(formData)
+        .then(res=>headerStore.closeAuthModal())
+        .catch(error=>{
+            setError('Неверно введены данные')
+            setToast(true);
+        });
         clearForm();
     }
     const clearForm = ()=>{
@@ -56,7 +62,13 @@ const AuthWindow:React.FC = observer(()=>{
                         </Row>
                     </Form.Group>
                 </Form>
-                {error.length>0 && (<Alert className="mt-2" variant="danger">{error}</Alert>)}
+                {error.length>0 && (
+                    <Toast className="mt-2 bg-danger text-white w-100 alert alert-danger" delay={4000} onClose={()=>setToast(false)} show={toast} autohide>
+                    <Toast.Body>
+                    {error}
+                    </Toast.Body>
+                    </Toast>
+                )}
             </Modal.Body>
         </Modal>
     )

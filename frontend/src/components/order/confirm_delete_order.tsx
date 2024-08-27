@@ -7,6 +7,7 @@ const ConfirmDeleteOrder:React.FC = observer(()=>{
     const rootStore = useStore();
     const {orderStore} = rootStore!;
     const submitForm = async (ev:FormEvent<HTMLFormElement>)=>{
+        ev.preventDefault();
         await orderStore.deleteOrder();
     }
     return(

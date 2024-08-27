@@ -32,6 +32,17 @@ export default class OrderController {
             res.status(500).json({ error });
         }
     }
+    public static async read(req:Request,res:Response){
+        try {
+            const orders = await Order.find({})
+            .select('description status createdAt')
+            .populate({path:'user',select:'name surname patronymic'})
+            .populate({path:'tarif',select:'name size price'}).lean();
+            res.status(200).json({ orders });
+        } catch (error) {
+            res.status(500).json({ error });
+        }
+    }
     public static async delete(req:Request,res:Response){
         try {
             const id = req.params.id;
