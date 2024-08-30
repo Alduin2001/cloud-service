@@ -17,7 +17,7 @@ const TarifItem:React.FC<TarifOption> = observer(({_id,name,price,size})=>{
         <>
         {tarifStore.isOpenEditModal && (<EditTarif />)}
         {tarifStore.isOpenDelModal && (<ConfirmDeleteTarif/>)}
-        <Col>
+        <Col md={4}>
             <Card>
                 <Card.Header>{name}</Card.Header>
                 <Card.Body>

@@ -37,7 +37,7 @@ export default class OrderStore {
 
     public async getMyOrders(){
         try {
-            const decoded:any = jwtDecode<JwtPayload>(this.token);
+            const decoded:object = jwtDecode<JwtPayload>(this.token);
             const response:AxiosResponse = await MainService.get(`/api/orders/myorders?user=${decoded._id}`);
             this.orders = response.data.myorders;
         } catch (error) {
@@ -52,6 +52,15 @@ export default class OrderStore {
             console.error("Error retrieving orders:", error);
             this.statusCode = 500;
             this.statusMessage = "Failed to retrieve orders";
+        }
+    }
+    public async changeStatus(_id:string,state:object){
+        try {
+            const response:AxiosResponse = await MainService.put(`/api/orders/change_status/${_id}`,state);
+            this.statusCode = response.status;
+            this.statusMessage = response.data.msg;
+        } catch (error) {
+            console.log(error);
         }
     }
     public async deleteOrder(){

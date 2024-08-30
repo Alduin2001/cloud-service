@@ -1,7 +1,10 @@
-import React from "react";
-import { Button, Card, CardBody, Col, Row, Form } from "react-bootstrap";
+import React,{MouseEvent, useState} from "react";
+import { Button, Card, CardBody, Col, Row, Form, Alert } from "react-bootstrap";
 import moment from "moment";
+import { useStore } from "../../config/context";
+import { observer } from "mobx-react";
 interface OrderOption{
+    _id:string,
     user:{
         name:string,
         surname:string,
@@ -15,8 +18,17 @@ interface OrderOption{
     description:string,
     createdAt:string
 }
-const OrderItem:React.FC<OrderOption> = ({user,tarif,description,createdAt})=>{
-
+const OrderItem:React.FC<OrderOption> = observer(({_id, user,tarif,description,createdAt})=>{
+    const rootStore = useStore();
+    const {orderStore} = rootStore!;
+    const allowOrder = async (ev:MouseEvent<HTMLButtonElement>)=>{
+        ev.preventDefault();
+        await orderStore.changeStatus(_id,{status:'Одобрено'});
+    }
+    const dissalowOrder = async (ev:MouseEvent<HTMLButtonElement>)=>{
+        ev.preventDefault();
+        await orderStore.changeStatus(_id,{status:'Отклонено'});
+    }
     return(
         <Col>
             <Card>
@@ -30,10 +42,10 @@ const OrderItem:React.FC<OrderOption> = ({user,tarif,description,createdAt})=>{
                     <Form>
                     <Row>
                         <Col>
-                            <Button variant="success" className="w-100">Подтвердить</Button>
+                            <Button variant="success" className="w-100" onClick={allowOrder}>Подтвердить</Button>
                         </Col>
                         <Col>
-                            <Button variant="danger" className="w-100">Удалить</Button>
+                            <Button variant="danger" className="w-100" onClick={dissalowOrder}>Отклонить</Button>
                         </Col>
                     </Row>
                     </Form>
@@ -42,5 +54,5 @@ const OrderItem:React.FC<OrderOption> = ({user,tarif,description,createdAt})=>{
             </Card>
         </Col>
     )
-}
+})
 export default OrderItem;

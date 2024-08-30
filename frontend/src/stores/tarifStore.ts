@@ -5,9 +5,9 @@ import { AxiosResponse } from "axios";
 export default class TarifStore{
     public status:number = 0;
     public statusMessage:string = '';
-    public page:number | any = 1;
-    public pages:number | any = 0;
-    public limit:number | any = 10;
+    public page:number = 1;
+    public pages:number = 0;
+    public limit:number = 10;
     public tarifs = [];
     public isOpenDelModal:boolean = false;
     public isOpenEditModal:boolean = false;
@@ -52,7 +52,10 @@ export default class TarifStore{
     public async update(data:object){
         try {
             const response = await MainService.put(`/api/tarif/update/${this.selectedTarif}`,data);
-            
+            this.status = response.status;
+            if(this.status>=200){
+                this.closeEditModal();
+            }
             console.log(response);
         } catch (error) {
             console.log(error);

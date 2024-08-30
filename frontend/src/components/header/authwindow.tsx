@@ -21,8 +21,8 @@ const AuthWindow:React.FC = observer(()=>{
     const submitForm = async (ev:FormEvent<HTMLFormElement>)=>{
         ev.preventDefault();
         await userStore.login(formData)
-        .then(res=>headerStore.closeAuthModal())
-        .catch(error=>{
+        .then(()=>headerStore.closeAuthModal())
+        .catch(()=>{
             setError('Неверно введены данные')
             setToast(true);
         });

@@ -3,6 +3,7 @@ import { Button, Container, Pagination, Row, Form, Col } from "react-bootstrap";
 import OrderItem from "./order_item";
 import { observer } from "mobx-react";
 import { useStore } from "../../config/context";
+import { Toast } from "react-bootstrap";
 const ManageOrders:React.FC = observer(()=>{
     document.title = 'Управление заказами';
     const rootStore = useStore();
@@ -45,7 +46,7 @@ const ManageOrders:React.FC = observer(()=>{
         </Form>
             <Row className="mt-2">
                 {orderStore.orders.map((el:any,i)=><OrderItem key={i}
-                 user={el.user} tarif={el.tarif}
+                 user={el.user} tarif={el.tarif} _id={el._id}
                  description={el.description} createdAt={el.createdAt}/>)}
             </Row>
             <Pagination className="justify-content-center mt-2">

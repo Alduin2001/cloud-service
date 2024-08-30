@@ -43,6 +43,16 @@ export default class OrderController {
             res.status(500).json({ error });
         }
     }
+    public static async changeState(req:Request,res:Response){
+        try {
+            const id = req.params.id;
+            const {status} = req.body;
+            const order = await Order.findByIdAndUpdate(id,{status:status});
+            res.status(200).json({msg:'Изменено'});
+        } catch (error) {
+            res.status(500).json({error});
+        }
+    }
     public static async delete(req:Request,res:Response){
         try {
             const id = req.params.id;

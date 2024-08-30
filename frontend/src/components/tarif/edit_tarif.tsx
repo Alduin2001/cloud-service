@@ -6,10 +6,10 @@ const EditTarif:React.FC = observer(()=>{
     const rootStore = useStore();
     const {tarifStore} = rootStore!;
     const [formData,setFormData] = useState({
-        name:'',
-        price:'',
-        size:'',
-        description:''
+        name:"",
+        price:0,
+        size:0,
+        description:""
     });
     const handleChange = (ev:ChangeEvent<HTMLInputElement>)=>{
         const {name,value} = ev.currentTarget;
@@ -18,17 +18,16 @@ const EditTarif:React.FC = observer(()=>{
             [name]:value
         }))
     }
-    const submitForm = (ev:FormEvent<HTMLFormElement>)=>{
+    const submitForm = async (ev:FormEvent<HTMLFormElement>)=>{
         ev.preventDefault();
+        await tarifStore.update(formData);
+        
     }
     return(
         <Modal show={tarifStore.isOpenEditModal} onHide={()=>tarifStore.closeEditModal()}>
             <Modal.Header closeButton>Форма редактирования тарифа</Modal.Header>
-            <Form>
-                <Form.Group>
-                    <Form.Label>Идентификатор</Form.Label>
-                    <Form.Control value={tarifStore.selectedTarif}/>
-                </Form.Group>
+            <Modal.Body>
+            <Form onSubmit={submitForm}>
                 <Form.Group>
                     <Form.Label>Название</Form.Label>
                     <Form.Control name="name" value={formData.name} onChange={handleChange}/>
@@ -45,12 +44,13 @@ const EditTarif:React.FC = observer(()=>{
                     <Form.Label>Описание</Form.Label>
                     <Form.Control as="textarea" name="description" value={formData.description} onChange={handleChange} rows={5}/>
                 </Form.Group>
-                <Row>
+                <Row className="mt-2">
                     <Col>
-                        <Button variant="success">Редактировать</Button>
+                        <Button type="submit" className="w-100" variant="success">Редактировать</Button>
                     </Col>
                 </Row>
             </Form>
+            </Modal.Body>
         </Modal>
     )
 })
